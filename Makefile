@@ -7,6 +7,8 @@ PHP_CONT = $(DOCKER_COMP) exec php
 # Executables
 PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
+COMPOSER_INSTALL = $(COMPOSER) install
+COMPOSER_UPDATE = $(COMPOSER) update
 SYMFONY  = $(PHP) bin/console
 
 # Misc
@@ -48,9 +50,11 @@ composer: ## Run composer, pass the parameter "c=" to run a given command, examp
 	@$(eval c ?=)
 	@$(COMPOSER) $(c)
 
-vendor: ## Install vendors according to the current composer.lock file
-vendor: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction
-vendor: composer
+composer-install: ## Install composer dependencies.
+	$(COMPOSER_INSTALL)
+	
+composer-update: ## Update composer dependencies.
+	$(COMPOSER_UPDATE)
 
 ## —— Symfony 🎵 ———————————————————————————————————————————————————————————————
 sf: ## List all Symfony commands or pass the parameter "c=" to run a given command, example: make sf c=about
