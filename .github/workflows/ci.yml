@@ -89,6 +89,6 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key
           chmod 600 private_key
-          ssh -i private_key -o StrictHostKeyChecking=no root@147.79.100.153 'cd /root/projects/test-frankenphp && git pull'
+          ssh -i private_key -o StrictHostKeyChecking=no root@147.79.100.153 'cd /root/projects/test-frankenphp && git pull origin main'
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
